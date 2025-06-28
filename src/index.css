@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-red-50 min-h-screen;
+}
+
+/* Add custom container for max width and padding */
+.container-custom {
+  @apply max-w-4xl mx-auto px-4 sm:px-8;
+}
+
+/* Card shadow and rounded for desktop */
+.card-desktop {
+  @apply rounded-2xl shadow-xl border border-red-200;
+}
+
+/* Responsive font sizes for headings */
+.heading-desktop {
+  @apply text-3xl lg:text-4xl font-extrabold tracking-tight;
+}
+
+/* Responsive button styles */
+.btn-desktop {
+  @apply px-8 py-3 text-lg rounded-xl font-bold shadow-md;
+}

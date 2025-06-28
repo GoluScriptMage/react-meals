@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Sushi and Veggies",
+    "description": "Fresh sushi rolls with assorted veggies.",
+    "price": 16.99
+  },
+  {
+    "id": 2,
+    "name": "Paneer Tikka",
+    "description": "Grilled paneer cubes marinated in spices.",
+    "price": 12.49
+  },
+  {
+    "id": 3,
+    "name": "Margherita Pizza",
+    "description": "Classic pizza with tomato, mozzarella, and basil.",
+    "price": 10.99
+  },
+  {
+    "id": 4,
+    "name": "Veggie Burger",
+    "description": "Juicy burger with a crispy veggie patty.",
+    "price": 9.99
+  },
+  {
+    "id": 5,
+    "name": "Pasta Alfredo",
+    "description": "Creamy Alfredo pasta with mushrooms and herbs.",
+    "price": 13.49
+  },
+  {
+    "id": 6,
+    "name": "Caesar Salad",
+    "description": "Crisp romaine lettuce with Caesar dressing.",
+    "price": 8.99
+  },
+  {
+    "id": 7,
+    "name": "Chole Bhature",
+    "description": "Spicy chickpeas served with fluffy fried bread.",
+    "price": 11.99
+  },
+  {
+    "id": 8,
+    "name": "Chocolate Brownie",
+    "description": "Rich chocolate brownie with walnuts.",
+    "price": 6.49
+  }
+]
