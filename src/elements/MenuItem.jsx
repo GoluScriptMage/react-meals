@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
-import MenuData from "../data/menuData";
+import MenuData from "../Data/menuData.json";
+// import MenuData from "../data/menuData";
 import { CartContext } from "../context/CartContext";
 
 const MenuItem = () => {
