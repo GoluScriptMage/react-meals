@@ -1,27 +1,25 @@
 import { getLocalStorage } from "../utils/localStorage";
+
 // Initial state for the cart
 export let initialCartState = {
-  items: [
-    {
-      id: 1,
-      name: "Sushi and Veggies",
-      amount: 16.99,
-      quantity: 1,
-    },
-  ],
-  totalAmount: 16.99,
-  totalItemsNumber: 1,
+  items: [],
+  totalAmount: 0,
+  totalItemsNumber: 0,
   isCartOpen: false,
+  isCheckoutOpen: false,
   isOrderPlaced: false,
 };
 
 // Getting the cartState is true update the initialCartState with the data
-if(getLocalStorage("cartState")){
+if (getLocalStorage("cartState")) {
   initialCartState = getLocalStorage("cartState");
 }
 
 // Reducer function to handle cart actions
 export const cartReducer = (state, action) => {
+
+  // console.log(`Logging the state: ${JSON.stringify(state)}`)
+
   switch (action.type) {
     case "ADD_ITEM": {
       const updatedItems = [...state.items];
@@ -99,21 +97,22 @@ export const cartReducer = (state, action) => {
     }
     case "ORDER_PLACED": {
       return {
+        ...initialCartState, // Use all initial state properties
+        isCartOpen: true, // Keep modal open to show success message
+        isCheckoutOpen: false, // Close checkout form
+        isOrderPlaced: true, // Set order placed flag
+      };
+    }
+    case "TOGGLE_CHECKOUT": {
+      return {
         ...state,
-        items: [],
-        totalAmount: 0,
-        isCartOpen: true,
-        totalItemsNumber: 0,
-        isOrderPlaced: true,
+        isCheckoutOpen: !state.isCheckoutOpen,
+        isOrderPlaced: false,
       };
     }
   }
   return {
     ...state,
-    items: [],
-    totalAmount: 0,
-    isCartOpen: false,
-    totalItemsNumber: 0,
+    items: state.items || [],
   };
 };
-

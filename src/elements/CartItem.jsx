@@ -1,10 +1,12 @@
 import React from "react";
 import { CartContext } from "../context/CartContext";
 import { useContext } from "react";
+import Button from "./Button";
 
 const CartItem = () => {
   const { cartState, dispatchCart } = useContext(CartContext);
   const { items, totalAmount } = cartState;
+
 
   return (
     <>
@@ -62,27 +64,17 @@ const CartItem = () => {
       <div className="flex items-center justify-between mb-4">
         <span className="font-semibold text-gray-900">Total Amount</span>
         <span className="font-bold text-lg text-red-700">
-          ${totalAmount.toFixed(2)}
+          ${totalAmount ? totalAmount.toFixed(2) : '0.00'}
         </span>
       </div>
       <div className="flex gap-4">
-        <button
-          onClick={() => dispatchCart({ type: "CLOSE_CART" })}
-          className="flex-1 py-2 rounded bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold"
-        >
-          Close
-        </button>
-        <button
-          onClick={() => {
-            return dispatchCart({ type: "ORDER_PLACED" });
-          }}
-          className="flex-1 py-2 rounded bg-red-600 hover:bg-red-700 text-white font-semibold"
-        >
-          Order
-        </button>
+          <Button btnFor="Close" dispatchType="CLOSE_CART" /> 
+          <Button btnFor="Checkout" dispatchType="TOGGLE_CHECKOUT" /> 
+        
       </div>
     </>
   );
 };
 
 export default CartItem;
+
