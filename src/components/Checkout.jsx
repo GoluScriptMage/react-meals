@@ -62,7 +62,7 @@ const Checkout = () => {
             id="name"
             value={formData.name}
             onChange={(e) => updateFormData(e)}
-            className="w-full px-4 py-2 pl-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-red-300 focus:border-transparent transition bg-white"
+            className="w-full px-4 py-2 pl-4 border text-gray-900 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-red-300 focus:border-transparent transition bg-white"
             placeholder="Enter your name"
             required
           />
@@ -79,7 +79,7 @@ const Checkout = () => {
             id="email"
             value={formData.email}
             onChange={(e) => updateFormData(e)}
-            className="w-full px-4 py-2 pl-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-red-300 focus:border-transparent transition bg-white"
+            className="w-full px-4 py-2 pl-4 border text-gray-900 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-red-300 focus:border-transparent transition bg-white"
             placeholder="Enter your email"
             required
           />
