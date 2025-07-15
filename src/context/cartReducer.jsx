@@ -17,7 +17,6 @@ if (getLocalStorage("cartState")) {
 
 // Reducer function to handle cart actions
 export const cartReducer = (state, action) => {
-
   // console.log(`Logging the state: ${JSON.stringify(state)}`)
 
   switch (action.type) {
@@ -98,6 +97,9 @@ export const cartReducer = (state, action) => {
     case "ORDER_PLACED": {
       return {
         ...initialCartState, // Use all initial state properties
+        items: [],
+        totalAmount: 0,
+        totalItemsNumber: 0,
         isCartOpen: true, // Keep modal open to show success message
         isCheckoutOpen: false, // Close checkout form
         isOrderPlaced: true, // Set order placed flag

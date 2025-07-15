@@ -4,9 +4,11 @@ import { CartContext } from "../context/CartContext";
 
 import { useGetFetch } from "../hooks/useGetFetch";
 // import { usePostFetch } from "../hooks/usePostFetch";
+import Spinner from "../ui/Spinner";
 
 const MenuItem = () => {
   const [inputQuantity, setInputQuantity] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { dispatchCart } = useContext(CartContext);
 
   // Run only to update the menu data
@@ -21,19 +23,22 @@ const MenuItem = () => {
   let isExecuted = useRef(false);
 
   useEffect(() => {
-    if(isExecuted.current) return;
+    if (isExecuted.current) return;
     isExecuted.current = true;
-  
+    setIsLoading(true);
+
     const fetchMenuItems = async () => {
       const data = await getMultipleData("/menu");
       setMenuItems(data || []);
+      setIsLoading(false);
     };
     fetchMenuItems();
   }, [getMultipleData]); // Added getMultipleData to the dependency array
 
   return (
     <>
-      {menuItems.map((item) => (
+      {isLoading && (<Spinner />)}
+      {!isLoading && menuItems.map((item) => (
         <li
           key={item.id}
           className="flex flex-col sm:flex-row sm:items-center justify-between bg-red-50 rounded-lg p-3 sm:p-4 shadow-sm border border-red-100"
@@ -46,7 +51,7 @@ const MenuItem = () => {
               {item.description}
             </p>
             <p className="text-red-700 font-bold text-base sm:text-lg">
-              ${item.price ? item.price.toFixed(2) : '0.00'}
+              ${item.price ? item.price.toFixed(2) : "0.00"}
             </p>
           </div>
           <div className="flex flex-col items-end gap-2 min-w-[160px] lg:min-w-[200px] bg-white rounded-lg p-4 border border-red-100 shadow-sm">

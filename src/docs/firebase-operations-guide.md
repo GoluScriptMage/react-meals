@@ -3,15 +3,18 @@
 ## Common Mistakes and Solutions
 
 ### 1. **The `child()` Function Error**
+
 **Problem:** Using `child()` function incorrectly with Firebase v9+ syntax.
 
 **❌ Wrong Way (Old Firebase v8 syntax):**
+
 ```javascript
 import { child } from "firebase/database";
 const snapshot = await get(child(ref(db), path));
 ```
 
 **✅ Correct Way (Firebase v9+ syntax):**
+
 ```javascript
 import { ref, get } from "firebase/database";
 const dbRef = ref(db, path);
@@ -19,17 +22,20 @@ const snapshot = await get(dbRef);
 ```
 
 ### 2. **Path Validation Issues**
+
 **Problem:** Not validating paths before using them.
 
 **❌ Wrong Way:**
+
 ```javascript
 const getData = async (path) => {
   const dbRef = ref(db, path); // No validation
   const snapshot = await get(dbRef);
-}
+};
 ```
 
 **✅ Correct Way:**
+
 ```javascript
 const getData = async (path) => {
   if (!path || typeof path !== "string") {
@@ -37,13 +43,15 @@ const getData = async (path) => {
   }
   const dbRef = ref(db, path);
   const snapshot = await get(dbRef);
-}
+};
 ```
 
 ### 3. **Error Handling**
+
 **Problem:** Not properly handling and returning errors.
 
 **❌ Wrong Way:**
+
 ```javascript
 const getData = async (path) => {
   try {
@@ -52,10 +60,11 @@ const getData = async (path) => {
     console.error(err);
     // No return value
   }
-}
+};
 ```
 
 **✅ Correct Way:**
+
 ```javascript
 const getData = async (path) => {
   try {
@@ -65,7 +74,7 @@ const getData = async (path) => {
     console.error("Error fetching data:", err);
     return { data: null, error: err.message };
   }
-}
+};
 ```
 
 ---
@@ -73,6 +82,7 @@ const getData = async (path) => {
 ## How to Use Firebase GET Operations
 
 ### 1. **Basic Usage:**
+
 ```javascript
 import { useGetFetch } from "./hooks/useGetFetch";
 
@@ -81,7 +91,7 @@ const MyComponent = () => {
 
   const fetchMenuData = async () => {
     const result = await getData("/menu");
-    
+
     if (result.data) {
       console.log("Menu data:", result.data);
     } else {
@@ -89,15 +99,12 @@ const MyComponent = () => {
     }
   };
 
-  return (
-    <button onClick={fetchMenuData}>
-      Fetch Menu
-    </button>
-  );
+  return <button onClick={fetchMenuData}>Fetch Menu</button>;
 };
 ```
 
 ### 2. **With React useEffect:**
+
 ```javascript
 import { useEffect, useState } from "react";
 import { useGetFetch } from "./hooks/useGetFetch";
@@ -111,7 +118,7 @@ const MenuComponent = () => {
     const fetchMenu = async () => {
       setLoading(true);
       const result = await getData("/menu");
-      
+
       if (result.data) {
         setMenuItems(Object.values(result.data));
       }
@@ -125,7 +132,7 @@ const MenuComponent = () => {
 
   return (
     <div>
-      {menuItems.map(item => (
+      {menuItems.map((item) => (
         <div key={item.id}>{item.name}</div>
       ))}
     </div>
@@ -138,6 +145,7 @@ const MenuComponent = () => {
 ## How to Use Firebase POST Operations
 
 ### 1. **Basic Usage:**
+
 ```javascript
 import { usePostFetch } from "./hooks/usePostFetch";
 
@@ -148,11 +156,11 @@ const AddItemComponent = () => {
     const newItem = {
       name: "Pizza Margherita",
       description: "Classic pizza with tomato and mozzarella",
-      price: 12.99
+      price: 12.99,
     };
 
     const key = await postData(newItem, "/menu");
-    
+
     if (key) {
       console.log("Item added with key:", key);
     } else {
@@ -160,15 +168,12 @@ const AddItemComponent = () => {
     }
   };
 
-  return (
-    <button onClick={addMenuItem}>
-      Add Menu Item
-    </button>
-  );
+  return <button onClick={addMenuItem}>Add Menu Item</button>;
 };
 ```
 
 ### 2. **With Form Handling:**
+
 ```javascript
 import { useState } from "react";
 import { usePostFetch } from "./hooks/usePostFetch";
@@ -177,20 +182,20 @@ const AddMenuForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
-    price: ""
+    price: "",
   });
   const { postData } = usePostFetch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const menuItem = {
       ...formData,
-      price: parseFloat(formData.price)
+      price: parseFloat(formData.price),
     };
 
     const key = await postData(menuItem, "/menu");
-    
+
     if (key) {
       alert("Menu item added successfully!");
       setFormData({ name: "", description: "", price: "" });
@@ -205,19 +210,21 @@ const AddMenuForm = () => {
         type="text"
         placeholder="Name"
         value={formData.name}
-        onChange={(e) => setFormData({...formData, name: e.target.value})}
+        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
       />
       <input
         type="text"
         placeholder="Description"
         value={formData.description}
-        onChange={(e) => setFormData({...formData, description: e.target.value})}
+        onChange={(e) =>
+          setFormData({ ...formData, description: e.target.value })
+        }
       />
       <input
         type="number"
         placeholder="Price"
         value={formData.price}
-        onChange={(e) => setFormData({...formData, price: e.target.value})}
+        onChange={(e) => setFormData({ ...formData, price: e.target.value })}
       />
       <button type="submit">Add Item</button>
     </form>
@@ -230,6 +237,7 @@ const AddMenuForm = () => {
 ## Firebase Database Structure Best Practices
 
 ### 1. **Proper Path Structure:**
+
 ```javascript
 // ✅ Good structure
 /menu
@@ -248,15 +256,16 @@ getData("/menu/-ABC123")
 ```
 
 ### 2. **Avoid These Path Patterns:**
+
 ```javascript
 // ❌ Don't use these characters in paths:
 // ".", "#", "$", "[", "]"
 
 // ❌ Wrong:
-getData("/menu.items")  // Contains "."
-getData("/menu#new")    // Contains "#"
-getData("/menu$temp")   // Contains "$"
-getData("/menu[0]")     // Contains "["
+getData("/menu.items"); // Contains "."
+getData("/menu#new"); // Contains "#"
+getData("/menu$temp"); // Contains "$"
+getData("/menu[0]"); // Contains "["
 ```
 
 ---
@@ -264,11 +273,12 @@ getData("/menu[0]")     // Contains "["
 ## Error Handling Best Practices
 
 ### 1. **Always Handle Both Success and Error Cases:**
+
 ```javascript
 const handleDataFetch = async () => {
   try {
     const result = await getData("/menu");
-    
+
     if (result.data) {
       // Handle success
       setData(result.data);
@@ -284,6 +294,7 @@ const handleDataFetch = async () => {
 ```
 
 ### 2. **Provide User Feedback:**
+
 ```javascript
 const [loading, setLoading] = useState(false);
 const [error, setError] = useState(null);
@@ -291,15 +302,15 @@ const [error, setError] = useState(null);
 const fetchData = async () => {
   setLoading(true);
   setError(null);
-  
+
   const result = await getData("/menu");
-  
+
   if (result.data) {
     // Success
   } else {
     setError(result.error);
   }
-  
+
   setLoading(false);
 };
 ```
@@ -309,18 +320,22 @@ const fetchData = async () => {
 ## Common Issues and Solutions
 
 ### Issue 1: "child failed: path argument was an invalid path"
+
 **Cause:** Using old Firebase syntax or invalid path characters.
 **Solution:** Use `ref(db, path)` instead of `child()` and validate paths.
 
 ### Issue 2: "postData is not a function"
+
 **Cause:** Incorrect import or hook usage.
 **Solution:** Ensure proper export/import and hook structure.
 
 ### Issue 3: Data not showing up in Firebase
+
 **Cause:** Incorrect path or Firebase rules blocking access.
 **Solution:** Check Firebase console, verify path, and update security rules.
 
 ### Issue 4: CORS errors
+
 **Cause:** Browser security restrictions.
 **Solution:** Use Firebase SDK instead of REST API, or configure CORS properly.
 

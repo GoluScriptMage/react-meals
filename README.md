@@ -16,6 +16,7 @@ A modern food ordering application built with React and Firebase, featuring a re
 ## Technology Stack
 
 - **Frontend**:
+
   - React 19 with Hooks
   - Context API for state management
   - Custom hooks for data fetching
@@ -49,12 +50,14 @@ src/
 ### Steps
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/your-username/react-meals.git
    cd react-meals
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    # or
@@ -62,15 +65,18 @@ src/
    ```
 
 3. Create a Firebase project:
+
    - Go to [Firebase Console](https://console.firebase.google.com/)
    - Create a new project
    - Set up Realtime Database
    - Copy your Firebase configuration
 
 4. Create a Firebase configuration file:
+
    - Create `src/config/fireBase.js` with your Firebase credentials
 
 5. Start the development server:
+
    ```bash
    npm run dev
    # or
@@ -85,15 +91,18 @@ src/
 ## Usage Guide
 
 1. **Browsing the Menu**:
+
    - Scroll through available food items
    - View details including name, description, and price
 
 2. **Adding Items to Cart**:
+
    - Select quantity (1-10)
    - Click the "+ Add" button
    - View cart by clicking the cart icon
 
 3. **Managing Cart**:
+
    - Increase/decrease item quantities with +/- buttons
    - View running total amount
    - Proceed to checkout
