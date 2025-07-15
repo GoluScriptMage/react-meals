@@ -25,8 +25,6 @@ export const useGetFetch = () => {
     // Validate the Path
     validateArguments(path);
 
-    // Remove the global flag to allow multiple fetches
-    
     const result = await getData(path);
 
     if (!result) {
@@ -42,7 +40,6 @@ export const useGetFetch = () => {
           };
         })
       : [];
-    console.log(`Fetched items:`, itemsArray);
     return itemsArray;
   });
 

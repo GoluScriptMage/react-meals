@@ -30,8 +30,6 @@ export const usePostFetch = () => {
 
     if (!Array.isArray(data)) throw new Error("Data must be an array");
 
-    // Remove the global isExecuted flag to allow multiple postings
-    
     // Iterate over the unique data array and post each item
     const promises = data.map((item) => postData(item, path));
     const results = await Promise.all(promises);

@@ -6,8 +6,6 @@ const Modal = ({ cartMsg, modalFor, component }) => {
   const { cartState, dispatchCart } = useContext(CartContext);
   const { items, isCartOpen, isOrderPlaced } = cartState;
 
-  console.log(`Modal rendered with items:`, items);
-
   if (!isCartOpen) return null;
   const cartMessage =
     cartMsg ||

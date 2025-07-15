@@ -88,6 +88,24 @@ src/
    http://localhost:5173
    ```
 
+### Additional Setup
+
+#### Analytics Integration
+We have integrated `@vercel/analytics` for tracking user interactions. To install it, run:
+
+```bash
+npm install @vercel/analytics
+```
+
+Then, import and add the `Analytics` component to your app:
+
+```javascript
+import { Analytics } from '@vercel/analytics/react';
+
+// Add the Analytics component to your app
+<Analytics />
+```
+
 ## Usage Guide
 
 1. **Browsing the Menu**:

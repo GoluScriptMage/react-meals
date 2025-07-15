@@ -17,8 +17,6 @@ if (getLocalStorage("cartState")) {
 
 // Reducer function to handle cart actions
 export const cartReducer = (state, action) => {
-  // console.log(`Logging the state: ${JSON.stringify(state)}`)
-
   switch (action.type) {
     case "ADD_ITEM": {
       const updatedItems = [...state.items];
