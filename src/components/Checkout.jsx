@@ -7,14 +7,13 @@ import useFormValidation from "../hooks/useFormValidation";
 
 const Checkout = () => {
   const { dispatchCart, cartState } = useContext(CartContext);
+  const { postSpecificData } = usePostFetch();
 
   const { values, errors, touched, handleChange, handleBlur, resetForm } =
     useFormValidation(
       { name: "", email: "", address: "", phone: "" }, // Initial values
       { name: "text", email: "email", address: "text", phone: "number" } // Validation rules
     );
-
-  const { postSpecificData } = usePostFetch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,6 +32,7 @@ const Checkout = () => {
       const formData = {
         ...values,
         items: cartState.items, // Include cart items in the order
+        totalItemsNumber: cartState.totalItemsNumber,
         totalAmount: cartState.totalAmount,
         orderDate: new Date().toISOString(),
       };
