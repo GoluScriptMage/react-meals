@@ -29,7 +29,7 @@ const MenuItem = () => {
     setIsLoading(true);
 
     const fetchMenuItems = async () => {
-        const data = await getMultipleData("/mnu");
+        const data = await getMultipleData("/menu");
         if ((data.length === 0)) {
           setError({ isError: true, message: "No menu items found." });
           setIsLoading(false);
